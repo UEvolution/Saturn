@@ -1,0 +1,33 @@
+{
+  "name": "saturn",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/UEvolution/Saturn.git"
+  },
+  "keywords": [
+    "node",
+    "mysql",
+    "express"
+  ],
+  "author": "wolyshaw",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/UEvolution/Saturn/issues"
+  },
+  "homepage": "https://github.com/UEvolution/Saturn#readme",
+  "dependencies": {
+    "body-parser": "^1.17.2",
+    "express": "^4.15.3",
+    "express-session": "^1.15.3",
+    "jsonwebtoken": "^7.4.1",
+    "log4js": "^1.1.1",
+    "mysql": "^2.13.0",
+    "path": "^0.12.7"
+  }
+}
