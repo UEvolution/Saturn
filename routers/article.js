@@ -1,11 +1,22 @@
 const express = require('express')
+const {
+	checkParmas,
+	sendCheck
+} = require('../util/util')
 const router = express.Router()
+const {
+	getArticleList,
+	getArticleView
+} = require('../selects')
 
 router.post('/list', (req, res) => {
-	res.json({
-		msg: 'send article',
-		code: 200
-	})
+	getArticleList(r => res.json(r))
+})
+
+router.post('/view', (req, res) => {
+	let parmas = checkParmas(req.body, ['id'])
+	if (parmas.length) return res.json(sendCheck(parmas))
+	getArticleView(r => res.json(r))
 })
 
 module.exports = router
