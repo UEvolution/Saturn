@@ -15,6 +15,13 @@ const thenPool = select => {
 	})
 }
 
+const queryData = (select, callback) => {
+	if (!callback || typeof callback !== 'function') throw 'callback is required'
+	thenPool(select)
+		.then(r => callback(sendSuccess(r)))
+		.catch(r => callback(sendError(r)))
+}
+
 const sendError = error => ({
 	code: 100,
 	msg: '数据获取失败',
@@ -38,6 +45,11 @@ const sendNotFind = () => ({
 	msg: '此接口未定义'
 })
 
+const sendServerError = () => ({
+	code: 500,
+	msg: '服务器错误'
+})
+
 const checkParmas = (body, need) => {
 	let parmas = []
 	if (need && need.length) {
@@ -46,11 +58,25 @@ const checkParmas = (body, need) => {
 	return parmas
 }
 
+const parst = body => {
+	let key = [], value = []
+	for (let k in body) {
+		if (body.hasOwnProperty(k)) {
+			key.push(k)
+			value.push(body[k])
+		}
+	}
+	return { key, value }
+}
+
 module.exports = {
 	thenPool,
+	queryData,
 	sendSuccess,
 	sendCheck,
 	sendError,
 	sendNotFind,
-	checkParmas
+	sendServerError,
+	checkParmas,
+	parst
 }

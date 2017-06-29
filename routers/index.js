@@ -1,5 +1,7 @@
-const article = require('./article')
+const front = require('./front')
+const manage = require('./manage')
 
 module.exports = {
-	article
+	front,
+	manage
 }

@@ -1,9 +1,3 @@
-const {
-	getArticleList,
-	getArticleView
-} = require('./article')
+const article = require('./article')
 
-module.exports = {
-	getArticleList,
-	getArticleView
-}
+module.exports = Object.assign({}, article)
