@@ -78,5 +78,6 @@ module.exports = {
 	sendNotFind,
 	sendServerError,
 	checkParmas,
-	parst
+	parstParmas,
+	parmasToQuery
 }

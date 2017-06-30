@@ -11,7 +11,7 @@ const {
 } = require('../../selects')
 
 router.post('/list', (req, res) => {
-	getArticleList(r => res.json(r))
+	getArticleList(req.body, r => res.json(r))
 })
 
 router.post('/view', (req, res) => {
