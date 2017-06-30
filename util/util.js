@@ -1,6 +1,16 @@
-const mysql = require('mysql')
+const Sequelize = require('sequelize')
 const config = require('./../config')
 const pool  = mysql.createPool(config.mysql)
+
+const sequelize = new Sequelize(config.mysql.database, config.mysql.user, config.mysql.password, {
+	host: config.mysql.host,
+	dialect: 'mysql',
+	pool: {
+		max: 5,
+		min: 0,
+		idle: 10000
+	}
+})
 
 const thenPool = select => {
 	return new Promise((resolve, reject) => {
