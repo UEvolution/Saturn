@@ -1,9 +1,6 @@
 const express = require('express')
 const router = express.Router()
-const {
-  checkParmas,
-  sendCheck
-} = require('../../util/util')
+
 router.post('/list', (req, res) => {
   // getArticleList(req.body, r => res.json(r))
 })
