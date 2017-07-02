@@ -9,7 +9,6 @@ router.post('/list', (req, res) => {
 })
 
 router.post('/view', (req, res) => {
-  console.log(req.user_data)
   users.findOne({
     where: req.body
   })
@@ -18,10 +17,7 @@ router.post('/view', (req, res) => {
 
 router.post('/edit', (req, res) => {
   let { id }  = req.body
-  users.findOne({
-    where: { id }
-  })
-    // .update()
+  users.update(req.body, {where: {id}})
     .then(r => res.json(r))
 })
 

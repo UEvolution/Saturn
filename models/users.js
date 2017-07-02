@@ -19,7 +19,8 @@ let Users = sequelize.define('users', {
     type: Sequelize.STRING
   },
   status: {
-    type: Sequelize.INTEGER
+    type: Sequelize.INTEGER,
+    defaultValue: 21
   },
   email: {
     type: Sequelize.STRING,

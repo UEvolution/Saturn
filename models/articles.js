@@ -29,7 +29,8 @@ let Articles = sequelize.define('articles', {
     type: Sequelize.INTEGER
   },
   status: {
-    type: Sequelize.INTEGER
+    type: Sequelize.INTEGER,
+    defaultValue: 21
   },
   relate: {
     type: Sequelize.INTEGER

@@ -22,7 +22,8 @@ let Roles = sequelize.define('roles', {
     type: Sequelize.INTEGER
   },
   status: {
-    type: Sequelize.INTEGER
+    type: Sequelize.INTEGER,
+    defaultValue: 21
   }
 }, {
   freezeTableName: true
