@@ -1,5 +1,6 @@
 const Sequelize = require('sequelize')
 const sequelize = require('./index')
+const users = require('./users')
 
 let Articles = sequelize.define('articles', {
   id: {
@@ -19,10 +20,10 @@ let Articles = sequelize.define('articles', {
     type: Sequelize.STRING
   },
   excerpt: {
-    type: Sequelize.STRING
+    type: Sequelize.TEXT
   },
   content: {
-    type: Sequelize.STRING
+    type: Sequelize.TEXT
   },
   author: {
     type: Sequelize.INTEGER

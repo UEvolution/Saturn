@@ -19,10 +19,13 @@ let Users = sequelize.define('users', {
     type: Sequelize.INTEGER
   },
   email: {
-    type: Sequelize.STRING
+    type: Sequelize.STRING,
+    validate: {
+      isEmail: true
+    }
   },
   bio: {
-    type: Sequelize.STRING
+    type: Sequelize.TEXT
   },
   role: {
     type: Sequelize.INTEGER

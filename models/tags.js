@@ -16,7 +16,7 @@ let Tags = sequelize.define('tags', {
     unique: true
   },
   bio: {
-    type: Sequelize.STRING
+    type: Sequelize.TEXT
   },
   author: {
     type: Sequelize.INTEGER

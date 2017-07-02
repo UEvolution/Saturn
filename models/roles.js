@@ -16,7 +16,7 @@ let Roles = sequelize.define('roles', {
     unique: true
   },
   bio: {
-    type: Sequelize.STRING
+    type: Sequelize.TEXT
   },
   author: {
     type: Sequelize.INTEGER
