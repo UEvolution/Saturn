@@ -44,6 +44,7 @@ users.sync({force: true})
     users.create({
       status: 21,
       nice_name: 'wolyshaw',
+      password: 'saturn',
       role: 1
     })
   ))

@@ -1,4 +1,5 @@
 const Sequelize = require('sequelize')
+const jwt = require('jsonwebtoken')
 const config = require('./../config')
 
 const sequelize = new Sequelize(config.mysql.database, config.mysql.user, config.mysql.password, {
@@ -39,10 +40,15 @@ const sendServerError = () => ({
   msg: '服务器错误'
 })
 
+const getToken = data => jwt.sign({data}, 'fgfdhfghgj', { expiresIn: '1h' })
+
+
+
 module.exports = {
   sendSuccess,
   sendCheck,
   sendError,
   sendNotFind,
-  sendServerError
+  sendServerError,
+  getToken
 }

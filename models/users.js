@@ -12,6 +12,9 @@ let Users = sequelize.define('users', {
     type: Sequelize.STRING,
     unique: true
   },
+  password: {
+    type: Sequelize.STRING
+  },
   avatar: {
     type: Sequelize.STRING
   },
@@ -29,6 +32,10 @@ let Users = sequelize.define('users', {
   },
   role: {
     type: Sequelize.INTEGER
+  },
+  login_times: {
+    type: Sequelize.INTEGER,
+    defaultValue: 0
   }
 })
 

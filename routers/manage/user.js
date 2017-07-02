@@ -3,15 +3,25 @@ const users = require('../../models/users')
 const router = express.Router()
 
 router.post('/list', (req, res) => {
-  let { offset = 0, limit = 10}  = req.body.page || {}
+  let { offset = 0, limit = 10 }  = req.body.page || {}
   users.findAndCountAll({ offset, limit })
     .then(r => res.json(r))
 })
 
 router.post('/view', (req, res) => {
+  console.log(req.user_data)
   users.findOne({
     where: req.body
   })
+    .then(r => res.json(r))
+})
+
+router.post('/edit', (req, res) => {
+  let { id }  = req.body
+  users.findOne({
+    where: { id }
+  })
+    // .update()
     .then(r => res.json(r))
 })
 
