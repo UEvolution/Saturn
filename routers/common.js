@@ -16,7 +16,8 @@ router.use('/login', (req, res) => {
         })
       } else {
         res.json({
-          msg: '用户名，密码错误'
+          msg: '用户名，密码错误',
+          code: 100
         })
       }
     })
@@ -26,18 +27,21 @@ router.use('/register', (req, res) => {
   let { nice_name, password, email, avatar, bio } = req.body
   if (!nice_name) {
     return res.json({
-      msg: '请输入用户昵称'
+      msg: '请输入用户昵称',
+      code: 100
     })
   }
   if (!password) {
     return res.json({
-      msg: '请输入密码'
+      msg: '请输入密码',
+      code: 100
     })
   }
   users.create(req.body)
     .then(r => {
       res.json({
         msg: '注册成功',
+        code: 200,
         token: getToken(r)
       })
     })

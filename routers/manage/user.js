@@ -1,29 +1,30 @@
 const express = require('express')
+const { sendSuccess } = require('../../util/util');
 const users = require('../../models/users')
 const router = express.Router()
 
 router.post('/list', (req, res) => {
   let { offset = 0, limit = 10 }  = req.body.page || {}
   users.findAndCountAll({ offset, limit })
-    .then(r => res.json(r))
+    .then(r => res.json(sendSuccess(r)))
 })
 
 router.post('/view', (req, res) => {
   users.findOne({
     where: req.body
   })
-    .then(r => res.json(r))
+    .then(r => res.json(sendSuccess(r)))
 })
 
 router.post('/edit', (req, res) => {
   let { id }  = req.body
   users.update(req.body, {where: {id}})
-    .then(r => res.json(r))
+    .then(r => res.json(sendSuccess(r)))
 })
 
 router.post('/create', (req, res) => {
   users.create(req.body)
-    .then(r => res.json(r))
+    .then(r => res.json(sendSuccess(r)))
 })
 
 module.exports = router

@@ -18,10 +18,10 @@ const sendError = error => ({
   error: error
 })
 
-const sendSuccess = data => ({
+const sendSuccess = (data, msg = '数据获取成功') => ({
   code: 200,
   list: data,
-  msg: '数据获取成功'
+  msg
 })
 
 const sendCheck = check => ({

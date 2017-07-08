@@ -7,13 +7,15 @@ const user = require('./user')
 router.use((req, res, next) => {
   if (!req.headers.token) {
     res.json({
-      msg: '请检查token'
+      msg: '请检查token',
+      code: 100
     })
   } else {
     jwt.verify(req.headers.token, 'fgfdhfghgj', (error, data) => {
       if (error) {
         res.json({
           msg: 'token错误',
+          code: 100,
           error
         })
       } else {
