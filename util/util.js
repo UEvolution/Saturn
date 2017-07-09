@@ -12,10 +12,10 @@ const sequelize = new Sequelize(config.mysql.database, config.mysql.user, config
   }
 })
 
-const sendError = error => ({
+const sendError = (msg = '数据获取失败', error) => ({
   code: 100,
-  msg: '数据获取失败',
-  error: error
+  msg,
+  error
 })
 
 const sendSuccess = (data, msg = '数据获取成功') => ({
