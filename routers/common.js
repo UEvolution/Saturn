@@ -10,11 +10,9 @@ router.use('/login', (req, res) => {
     .then(r => {
       if (password === r.password) {
         let token = getToken(r)
-        res.json(sendSuccess(r, token))
+        res.json(sendSuccess(token, '登录成功'))
       } else {
-        res.json(sendError({
-          msg: '用户名，密码错误'
-        }))
+        res.json(sendError('用户名，密码错误'))
       }
     })
     .catch(error => res.json(sendError(undefined, error)))
