@@ -2,6 +2,7 @@ const express = require('express')
 const jwt = require('jsonwebtoken')
 const router = express.Router()
 const users = require('../models/users')
+const config = require('../config')
 const { getToken, sendError, sendSuccess } = require('../util/util')
 
 router.use('/login', (req, res) => {
@@ -31,6 +32,14 @@ router.use('/register', (req, res) => {
       res.json(sendSuccess(getToken(r), '注册成功'))
     })
     .catch(error => res.json(sendError(undefined, error)))
+})
+
+router.use('/user', (req, res) => {
+  let { token } = req.headers
+  if (!token) {
+    return res.json(sendError('token错误'))
+  }
+  res.json(sendSuccess(jwt.verify(token, config.jwtString), '注册成功'))
 })
 
 module.exports = router

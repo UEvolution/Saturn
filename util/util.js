@@ -40,7 +40,7 @@ const sendServerError = () => ({
   msg: '服务器错误'
 })
 
-const getToken = data => jwt.sign({data}, 'fgfdhfghgj', { expiresIn: '1h' })
+const getToken = data => jwt.sign({data}, config.jwtString, { expiresIn: '1h' })
 
 
 

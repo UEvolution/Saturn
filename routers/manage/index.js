@@ -2,6 +2,7 @@ const express = require('express')
 const jwt = require('jsonwebtoken')
 const router = express.Router()
 const article = require('./article')
+const config = require('../../config')
 const user = require('./user')
 
 router.use((req, res, next) => {
@@ -11,7 +12,7 @@ router.use((req, res, next) => {
       code: 100
     })
   } else {
-    jwt.verify(req.headers.token, 'fgfdhfghgj', (error, data) => {
+    jwt.verify(req.headers.token, config.jwtString, (error, data) => {
       if (error) {
         res.json({
           msg: 'token错误',
