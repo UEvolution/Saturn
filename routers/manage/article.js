@@ -26,7 +26,7 @@ router.post('/edit', (req, res) => {
 })
 
 router.post('/create', (req, res) => {
-  articles.create(req.body)
+  articles.create(Object.assign(req.body, {author: req.user_data.data.id}))
     .then(r => res.json(sendSuccess(r, '创建成功')))
     .catch(error => res.json(sendError(undefined, error)))
 })
