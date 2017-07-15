@@ -1,22 +1,22 @@
 const Sequelize = require('sequelize')
 const sequelize = require('./index')
 
-let user_role = sequelize.define('user_role', {
+let article_tag = sequelize.define('article_tag', {
   id: {
     type: Sequelize.INTEGER,
     unique: true,
     autoIncrement: true,
     primaryKey: true
   },
-  user_id: {
+  article_id: {
     type: Sequelize.STRING,
     unique: true
   },
-  role_id: {
+  tag_id: {
     type: Sequelize.INTEGER
   }
 }, {
   freezeTableName: true
 })
 
-module.exports = user_role
+module.exports = article_tag

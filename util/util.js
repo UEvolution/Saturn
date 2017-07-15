@@ -42,8 +42,6 @@ const sendServerError = () => ({
 
 const getToken = data => jwt.sign({data}, config.jwtString, { expiresIn: '1h' })
 
-
-
 module.exports = {
   sendSuccess,
   sendCheck,

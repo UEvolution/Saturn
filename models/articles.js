@@ -25,7 +25,7 @@ let Articles = sequelize.define('articles', {
   content: {
     type: Sequelize.TEXT
   },
-  author: {
+  author_id: {
     type: Sequelize.INTEGER
   },
   status: {
@@ -39,7 +39,8 @@ let Articles = sequelize.define('articles', {
     type: Sequelize.STRING
   },
   view: {
-    type: Sequelize.STRING
+    type: Sequelize.INTEGER,
+    defaultValue: 0
   }
 }, {
   freezeTableName: true

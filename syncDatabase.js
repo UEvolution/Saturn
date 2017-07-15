@@ -5,10 +5,10 @@ const articles = require('./models/articles')
 const users = require('./models/users')
 const roles = require('./models/roles')
 const tags = require('./models/tags')
-const user_role = require('./models/user_role')
+const article_tag = require('./models/article_tag')
 
 const config = require('./config')
-const { user, role, tag, userRole } = config.default
+const { user, role, tag, articleTag } = config.default
 
 roles.sync({force: true})
   .then(() => (
@@ -21,9 +21,9 @@ tags.sync({force: true})
   ))
 articles.sync({force: true})
 
-user_role.sync({force: true})
+article_tag.sync({force: true})
   .then(() => (
-    user_role.create(userRole)
+    article_tag.create(articleTag)
   ))
 
 users.sync({force: true})

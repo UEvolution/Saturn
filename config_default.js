@@ -15,9 +15,9 @@ module.exports = {
       role: 1,
       status: 21
     },
-    userRole: {
-      user_id: 1,
-      role_id: 1
+    articleTag: {
+      article_id: 1,
+      tag_id: 1
     },
     tag: {
       title: 'tag',

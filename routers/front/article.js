@@ -4,7 +4,7 @@ const { sendSuccess, sendError } = require('../../util/util')
 const articles = require('../../models/articles')
 const users = require('../../models/users')
 
-const articlesUsers = articles.belongsTo(users, {foreignKey: 'author'})
+const articlesUsers = articles.belongsTo(users, {foreignKey: 'author_id', as: 'author'})
 
 router.post('/list', (req, res) => {
   let { offset = 0, limit = 10 }  = req.body.page || {}
