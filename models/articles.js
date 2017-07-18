@@ -16,9 +16,6 @@ let Articles = sequelize.define('articles', {
     type: Sequelize.STRING,
     unique: true
   },
-  tags: {
-    type: Sequelize.STRING
-  },
   excerpt: {
     type: Sequelize.TEXT
   },

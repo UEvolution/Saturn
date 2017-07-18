@@ -9,8 +9,7 @@ let article_tag = sequelize.define('article_tag', {
     primaryKey: true
   },
   article_id: {
-    type: Sequelize.STRING,
-    unique: true
+    type: Sequelize.INTEGER
   },
   tag_id: {
     type: Sequelize.INTEGER
