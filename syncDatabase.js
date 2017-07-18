@@ -1,4 +1,4 @@
-// 本脚本会初始化数据库，请谨慎使用
+// 本脚本会初始化数据库，请谨慎使用.一般第一次使用即可
 
 const sequelize = require('./models')
 const articles = require('./models/articles')
