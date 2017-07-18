@@ -4,7 +4,10 @@ module.exports = {
     host: 'localhost',
     port: 3306,
     user: '',
-    password: ''
+    password: '',
+    dialectOptions: {
+      charset: 'utf8mb4'
+    }
   },
   port: 4000,
   jwtString: '',
