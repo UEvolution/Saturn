@@ -19,23 +19,28 @@ router.post('/list', (req, res) => {
 })
 
 router.post('/view', (req, res) => {
+  let { id, title, author_id, alias } = req.body
   articles.findOne({
-    where: req.body,
-    include: [articlesUsers, tags]
+    where: { id, title, author_id, alias, status: 21 },
+    include: [ articlesUsers, tags ]
   })
     .then(r => res.json(sendSuccess(r)))
     .catch(error => res.json(sendError(undefined, error)))
 })
 
 router.post('/edit', (req, res) => {
-  let { id }  = req.body
-  articles.update(req.body, {where: {id}, include: [articlesUsers]})
+  let { id, title, alias, status, excerpt, content, relate, pic }  = req.body
+  articles.update(
+    { title, alias, status, excerpt, content, relate, pic },
+    { where: { id }, include: [ articlesUsers ] }
+  )
     .then(r => res.json(sendSuccess(r)))
     .catch(error => res.json(sendError(undefined, error)))
 })
 
 router.post('/create', (req, res) => {
-  articles.create(req.body)
+  let { title, alias, status, excerpt, content, relate, pic }  = req.body
+  articles.create({ title, alias, status, excerpt, content, relate, pic })
     .then(r => res.json(sendSuccess(r, '创建成功')))
     .catch(error => res.json(sendError(undefined, error)))
 })
