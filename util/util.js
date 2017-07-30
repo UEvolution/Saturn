@@ -40,6 +40,22 @@ const sendServerError = () => ({
   msg: '服务器错误'
 })
 
+const clearObject = o => {
+  let _o = {}
+  for (let k in o) {
+    if (o.hasOwnProperty(k) && o[k]) {
+      _o[k] = o[k]
+    }
+  }
+  return _o
+}
+
+const bulkList = (id, list = []) => {
+  let _list = []
+  list.map(item => _list.push({article_id: id, tag_id: item}))
+  return _list
+}
+
 const getToken = data => jwt.sign({data}, config.jwtString, { expiresIn: '1h' })
 
 module.exports = {
@@ -48,5 +64,7 @@ module.exports = {
   sendError,
   sendNotFind,
   sendServerError,
-  getToken
+  getToken,
+  clearObject,
+  bulkList
 }

@@ -1,5 +1,5 @@
 const express = require('express')
-const { sendSuccess, sendError } = require('../../util/util')
+const { sendSuccess, sendError, clearObject } = require('../../util/util')
 const tags = require('../../models/tags')
 const router = express.Router()
 
@@ -13,7 +13,7 @@ router.post('/list', (req, res) => {
 router.post('/view', (req, res) => {
   let { id, title, alias, author } = req.body
   tags.findOne({
-    where: { id, title, alias, author, status: 21 }
+    where: clearObject({ id, title, alias, author, status: 21 })
   })
     .then(r => res.json(sendSuccess(r)))
     .catch(error => res.json(sendError(undefined, error)))
@@ -22,7 +22,7 @@ router.post('/view', (req, res) => {
 router.post('/edit', (req, res) => {
   let { id, title, alias, bio } = req.body
   tags.update(
-    { id, title, alias, bio },
+    clearObject({ id, title, alias, bio }),
     { where: { id } }
   )
     .then(r => res.json(sendSuccess(r)))
@@ -31,7 +31,7 @@ router.post('/edit', (req, res) => {
 
 router.post('/create', (req, res) => {
   let { id, title, alias, bio } = req.body
-  tags.create({ id, title, alias, bio })
+  tags.create(clearObject({ id, title, alias, bio }))
     .then(r => res.json(sendSuccess(r)))
     .catch(error => res.json(sendError(undefined, error)))
 })
