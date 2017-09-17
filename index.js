@@ -19,7 +19,7 @@ app.use(session({
 app.use((req, res, next) => logger.info(`api ${req.method} router: ${req.url}`) & next())
 app.use((err, req, res, next) => res.status(500).json(sendServerError))
 
-router.use((req, res, next) => {
+app.use((req, res, next) => {
   res.setHeader('Access-Control-Allow-Origin', '*')
   next()
 })
