@@ -13,7 +13,7 @@ tags.belongsToMany(articles, { through: article_tag, foreignKey: 'tag_id' })
 
 router.post('/list', (req, res) => {
   let { offset = 0, limit = 10 }  = req.body.page || {}
-  articles.findAndCountAll({ offset, limit, include: [articlesUsers] })
+  articles.findAndCountAll({ offset, limit, include: [ articlesUsers ] })
     .then(r => res.json(sendSuccess(r)))
     .catch(error => res.json(sendError(undefined, error)))
 })
