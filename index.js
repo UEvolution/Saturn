@@ -26,7 +26,7 @@ app.use((req, res, next) => {
   next()
 })
 
-app.use('/', routers)
+app.use(config.prefix, routers)
 app.post('*', (req, res) => res.json(sendNotFind()))
 
 app.listen(config.port, err => err ? logger.error(err) : logger.info(`server online in ${config.port}`))
