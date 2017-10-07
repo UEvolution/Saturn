@@ -8,7 +8,7 @@ const user = require('./user')
 router.use((req, res, next) => {
   if (!req.headers.token) {
     res.json({
-      msg: '请检查token',
+      msg: '请先登录',
       code: 100
     })
   } else {

@@ -2,8 +2,12 @@ const express = require('express')
 const jwt = require('jsonwebtoken')
 const router = express.Router()
 const users = require('../models/users')
+const qiniu = require('qiniu')
 const config = require('../config')
 const { getToken, sendError, sendSuccess } = require('../util/util')
+
+qiniu.conf.ACCESS_KEY = config.qiniu.ACCESS_KEY
+qiniu.conf.SECRET_KEY = config.qiniu.SECRET_KEY
 
 router.use('/login', (req, res) => {
   let { nice_name, password } = req.body
@@ -40,6 +44,16 @@ router.use('/user', (req, res) => {
     return res.json(sendError('token错误'))
   }
   res.json(sendSuccess(jwt.verify(token, config.jwtString), '注册成功'))
+})
+
+function uptoken(bucket, key) {
+  var putPolicy = new qiniu.rs.PutPolicy({scope: bucket});
+  return putPolicy.uploadToken();
+}
+
+router.use('/file/token', (req, res) => {
+  let { scope = 'play', key } = req.body
+  res.json(sendSuccess({ token: new qiniu.rs.PutPolicy({ scope }).uploadToken() }, '注册成功'))
 })
 
 module.exports = router
