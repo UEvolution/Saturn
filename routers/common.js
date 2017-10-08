@@ -43,15 +43,20 @@ router.use('/user', (req, res) => {
   if (!token) {
     return res.json(sendError('token错误'))
   }
-  res.json(sendSuccess(jwt.verify(token, config.jwtString), '注册成功'))
+  jwt.verify(token, config.jwtString, (err, data) => {
+    if(!err) {
+      res.json(sendSuccess(data, '获取成功'))
+    } else {
+      res.json(sendError('获取失败', err))
+    }
+  })
 })
 
-function uptoken(bucket, key) {
-  var putPolicy = new qiniu.rs.PutPolicy({scope: bucket});
-  return putPolicy.uploadToken();
-}
-
 router.use('/file/token', (req, res) => {
+  if (!req.user_data) {
+    res.json(sendError(undefined, '请先登录'))
+    return
+  }
   let { scope = 'play', key } = req.body
   res.json(sendSuccess({ token: new qiniu.rs.PutPolicy({ scope }).uploadToken() }, '注册成功'))
 })

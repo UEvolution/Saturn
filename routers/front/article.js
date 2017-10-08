@@ -14,7 +14,11 @@ tags.belongsToMany(articles, { through: article_tag, foreignKey: 'tag_id' })
 router.post('/list', (req, res) => {
   let { offset = 0, limit = 10 }  = req.body.page || {}
   articles.findAndCountAll({ offset, limit, include: [articlesUsers, tags] })
-    .then(r => res.json(sendSuccess(r)))
+    .then(r => {
+      r.offset = offset
+      r.limit = limit
+      return res.json(sendSuccess(r))
+    })
     .catch(error => res.json(sendError(undefined, error)))
 })
 
@@ -46,7 +50,6 @@ router.post('/edit', (req, res) => {
 
 router.post('/create', (req, res) => {
   let { title, alias, excerpt, content, relate, pic, tag = [] }  = req.body
-  console.log(req.user_data)
   if (!req.user_data) {
     res.json(sendError(undefined, '请先登录'))
     return

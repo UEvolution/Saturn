@@ -6,7 +6,11 @@ const router = express.Router()
 router.post('/list', (req, res) => {
   let { offset = 0, limit = 10 }  = req.body.page || {}
   users.findAndCountAll({ offset, limit })
-    .then(r => res.json(sendSuccess(r)))
+    .then(r => {
+      r.offset = offset
+      r.limit = limit
+      return res.json(sendSuccess(r))
+    })
     .catch(error => res.json(sendError(undefined, error)))
 })
 
