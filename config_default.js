@@ -1,12 +1,26 @@
 module.exports = {
-  mysql: {
-    database: '',
-    host: 'localhost',
-    port: 3306,
-    user: '',
-    password: '',
-    dialectOptions: {
-      charset: 'utf8mb4'
+  development: {
+    mysql: {
+      database: '',
+      host: 'localhost',
+      port: 3306,
+      user: '',
+      password: '',
+      dialectOptions: {
+        charset: 'utf8mb4'
+      }
+    }
+  },
+  production: {
+    mysql: {
+      database: '',
+      host: 'localhost',
+      port: 3306,
+      user: '',
+      password: '',
+      dialectOptions: {
+        charset: 'utf8mb4'
+      }
     }
   },
   port: 4000,

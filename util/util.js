@@ -1,16 +1,5 @@
-const Sequelize = require('sequelize')
 const jwt = require('jsonwebtoken')
 const config = require('./../config')
-
-const sequelize = new Sequelize(config.mysql.database, config.mysql.user, config.mysql.password, {
-  host: config.mysql.host,
-  dialect: 'mysql',
-  pool: {
-    max: 5,
-    min: 0,
-    idle: 10000
-  }
-})
 
 const sendError = (msg = '数据获取失败', error) => ({
   code: 100,

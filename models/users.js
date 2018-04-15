@@ -15,6 +15,9 @@ let Users = sequelize.define('users', {
   password: {
     type: Sequelize.STRING
   },
+  // pic: {
+  //   type: Sequelize.STRING
+  // },
   avatar: {
     type: Sequelize.STRING
   },

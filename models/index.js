@@ -1,8 +1,10 @@
 const Sequelize = require('sequelize')
 const config = require('./../config')
+const mode = process.env.NODE_ENV || 'development'
+const { mysql } = config[mode]
 
-const sequelize = new Sequelize(config.mysql.database, config.mysql.user, config.mysql.password, {
-  host: config.mysql.host,
+const sequelize = new Sequelize(mysql.database, mysql.user, mysql.password, {
+  host: mysql.host,
   dialect: 'mysql',
   pool: {
     max: 5,
