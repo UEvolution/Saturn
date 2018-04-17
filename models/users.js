@@ -10,10 +10,15 @@ let Users = sequelize.define('users', {
   },
   nice_name: {
     type: Sequelize.STRING,
+    allowNull: false,
     unique: true
   },
   password: {
-    type: Sequelize.STRING
+    type: Sequelize.STRING,
+    allowNull: false,
+    validate: {
+      len: [8, 64]
+    }
   },
   // pic: {
   //   type: Sequelize.STRING

@@ -1,12 +1,11 @@
 const express = require('express')
-const log4js = require('log4js')
+const logger = require('log4js').getLogger('saturn')
 const bodyParser = require('body-parser')
 const config = require('./config')
 const apis = require('./apis')
 const { sendNotFind, sendServerError } = require('./utils')
 const { mode } = require('./utils')
 const app = express()
-const logger = log4js.getLogger('saturn')
 
 app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({extended: true}))

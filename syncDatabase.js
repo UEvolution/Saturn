@@ -11,22 +11,27 @@ const config = require('./config')
 const { user, role, tag, articleTag } = config.default
 
 roles.sync({force: true})
-  .then(() => (
-    roles.create(role)
-  ))
+.then(() => (
+  roles.create(role)
+))
 
 tags.sync({force: true})
-  .then(() => (
-    tags.create(tag)
-  ))
+.then(() => (
+  tags.create(tag)
+))
+
 articles.sync({force: true})
 
 article_tag.sync({force: true})
-  .then(() => (
-    article_tag.create(articleTag)
-  ))
+.then(() => (
+  article_tag.create(articleTag)
+))
 
 users.sync({force: true})
-  .then(() => (
-    users.create(user)
-  ))
+.then(() => (
+  users.create(user)
+))
+.then(() => {
+  console.info('\n\n\ndata sync success\n\n\n')
+  process.exit()
+})

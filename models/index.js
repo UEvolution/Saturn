@@ -6,6 +6,7 @@ const { mysql } = config[mode]
 const sequelize = new Sequelize(mysql.database, mysql.user, mysql.password, {
   host: mysql.host,
   dialect: 'mysql',
+  timezone: '+08:00',
   pool: {
     max: 5,
     min: 0,

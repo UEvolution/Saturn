@@ -25,6 +25,7 @@ module.exports = {
   },
   port: 4000,
   jwtString: '',
+  cryptoText: '',
   default: {
     user: {
       nice_name: '',
