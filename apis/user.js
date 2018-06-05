@@ -28,7 +28,7 @@ router.use('/view', async (req, res) => {
 router.use(checkLogin)
 
 router.use('/destroy', async (req, res) => {
-  return await users.destroy({id: req.user.id})
+  return await users.destroy({where: {id: req.user.id}})
     .then(() => res.sendSuccess({msg: '删除成功'}))
     .catch(error => res.sendError(error))
 })
