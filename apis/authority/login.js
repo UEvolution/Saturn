@@ -1,16 +1,18 @@
 const users = require('../../models/users')
-const { sendSuccess, sendError } =  require('../../utils')
+const { hashPassword, getToken } =  require('../../utils')
 
 module.exports = (req, res) => {
   let { nice_name, password } = req.body
-  users.findOne({nice_name})
+  users.findOne({where: {nice_name}})
   .then(r => {
-    if (password === r.password) {
+    if (hashPassword(password) === r.password) {
+      r.login_times++
+      r.save()
       let token = getToken(r)
-      res.json(sendSuccess(token, '登录成功'))
+      res.sendSuccess({data: token, msg: '登录成功'})
     } else {
-      res.json(sendError('用户名，密码错误'))
+      res.sendError({msg: '用户名，密码错误'})
     }
   })
-  .catch(error => res.json(sendError(undefined, error)))
+  .catch(error => res.sendError({data: error}))
 }
