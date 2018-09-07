@@ -1,6 +1,6 @@
 const Sequelize = require('sequelize')
 const config = require('./../config')
-const mode = process.env.NODE_ENV || 'development'
+const { mode } = require('../utils')
 const { mysql } = config[mode]
 
 const sequelize = new Sequelize(mysql.database, mysql.user, mysql.password, {
@@ -11,7 +11,8 @@ const sequelize = new Sequelize(mysql.database, mysql.user, mysql.password, {
     max: 5,
     min: 0,
     idle: 10000
-  }
+  },
+  logging: false
 })
 
 module.exports = sequelize

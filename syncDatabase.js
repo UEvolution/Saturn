@@ -1,19 +1,18 @@
 // 本脚本会初始化数据库，请谨慎使用.一般第一次使用即可
 
-const sequelize = require('./models')
 const articles = require('./models/articles')
 const users = require('./models/users')
-const roles = require('./models/roles')
+// const roles = require('./models/roles')
 const tags = require('./models/tags')
 const article_tag = require('./models/article_tag')
 
 const config = require('./config')
 const { user, role, tag, articleTag } = config.default
 
-roles.sync({force: true})
-.then(() => (
-  roles.create(role)
-))
+// roles.sync({force: true})
+// .then(() => (
+//   roles.create(role)
+// ))
 
 tags.sync({force: true})
 .then(() => (

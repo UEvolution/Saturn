@@ -61,7 +61,15 @@ const formatError = (req, res, next) => {
     req.user = jwt.verify(req.headers['x-access-token'], config.jwtString).data
   } catch (error) {}
   res.sendSuccess = ({data, msg = '操作成功!', code = 200}) => res.json({code, msg, data})
-  res.sendError = ({msg = '操作失败!', code = 0, errors}) => {
+  res.sendError = error => {
+    let _err = error
+    if(typeof _err === 'string') {
+      _err = {
+        msg: error,
+        code: 0
+      }
+    }
+    let {msg = '操作失败!', code = 0, errors} = _err
     if(errors) {
       const es = []
       errors.map(e => es.push(e.message))
@@ -79,4 +87,4 @@ const checkLogin = (req, res, next) => {
   next()
 }
 
-module.exports = Object.assign({ mode, limitBody, hashPassword, getToken, formatError, checkLogin }, status)
+module.exports = Object.assign({ mode, limitBody, hashPassword, getToken, formatError, checkLogin, bulkList }, status)

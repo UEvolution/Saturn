@@ -1,7 +1,7 @@
 const Sequelize = require('sequelize')
 const sequelize = require('./index')
 
-const Tags = sequelize.define('tags', {
+let Tags = sequelize.define('tags', {
   id: {
     type: Sequelize.INTEGER,
     unique: true,
@@ -9,21 +9,11 @@ const Tags = sequelize.define('tags', {
     primaryKey: true
   },
   title: {
-    type: Sequelize.STRING,
-    validate: {
-      notEmpty: {
-        msg: '标签名称不能为空!'
-      }
-    }
+    type: Sequelize.STRING
   },
   alias: {
     type: Sequelize.STRING,
-    unique: true,
-    validate: {
-      notEmpty: {
-        msg: '别名不能为空!'
-      }
-    }
+    unique: true
   },
   bio: {
     type: Sequelize.TEXT
@@ -39,12 +29,7 @@ const Tags = sequelize.define('tags', {
     type: Sequelize.INTEGER
   },
   pic: {
-    type: Sequelize.STRING,
-    validate: {
-      notEmpty: {
-        msg: '请检查特色图片地址!'
-      }
-    }
+    type: Sequelize.STRING
   },
   view: {
     type: Sequelize.STRING

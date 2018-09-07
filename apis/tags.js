@@ -1,44 +1,49 @@
 const express = require('express')
+const sequelize = require('../models')
 const router = express.Router()
-const { tagsLimit } = require('../limits/index')
+const auth = require('./auth')
 
-const tags = require('../models/tags')
-const users = require('../models/users')
-const tagsUsers = tags.belongsTo(users, {foreignKey: 'author', as: 'user'})
+const Tags = require('../models/tags')
+const Users = require('../models/users')
 
-const {
-  limitBody,
-  bulkList
-} =  require('../utils')
+const TagsUsers = Tags.belongsTo(Users, {foreignKey: 'author'})
+const ArticlesTags = require('../models/article_tag')
 
-router.use('/list', (req, res) => {
-  tags.findAndCountAll({include: [ tagsUsers ]})
-    .then(r => res.sendSuccess({data: r}))
-    .catch(error => res.sendError({data: error}))
-})
-
-router.use('/view', async (req, res) => {
-  return limitBody(req.body, [['id', 'alias']])
-    .then(where => tags.findOne({where, include: [ tagsUsers ]}))
-    .then(r => res.sendSuccess({data: r}))
-    .catch(error => res.sendError(error))
-})
-
-router.use((req, res, next) => {
-  if(!req.user) {
-    return res.sendError({msg: '请先登录！'})
-  }
-  next()
-})
-
-router.use('/create', async (req, res) => {
-  return limitBody(req.body, tagsLimit.create)
-    .then(body => {
-      body.author = req.user.id
-      return tags.create({...body})
+router.use('/list', async (req, res) => {
+  Tags.findAndCountAll({where: {...req.body}, include: [{model: TagsUsers}]})
+    .then(r => res.json(r))
+    .catch(err => {
+      console.log(err)
+      res.json({msg: '暂无数据'})
     })
-    .then(r => res.sendSuccess({data: r, msg: '创建成功!'}))
-    .catch(error => res.sendError({data: error, msg: '创建失败!'}))
+})
+
+router.use('/view', (req, res) => {
+  Tags.findOne({where: {...req.body}, include: [TagsUsers]})
+    .then(r => res.json(r))
+    .catch(() => res.json({msg: '暂无数据'}))
+})
+
+router.use('/create', auth, (req, res) => {
+  Tags.create({...req.body, author: req.user.id})
+    .then(r => res.json({msg: '创建成功', data: r}))
+    .catch(() => res.json({msg: '创建失败'}))
+})
+
+router.use('/remove', auth, (req, res) => {
+  Tags.destroy({where: req.body})
+    .then(r => res.json({msg: '删除成功', data: r}))
+    .catch(() => res.json({msg: '删除成功'}))
+})
+
+router.use('/edit', auth, (req, res) => {
+  const { id, ...other } = req.body
+  if(!id) {
+    return res.json({msg: '缺少标签id'})
+  }
+  Tags.update({...other, author: req.user.id}, {where: {id: id}})
+    .then(() => res.json({msg: '修改成功'}))
+    .catch(() => res.json({msg: '修改成功'}))
 })
 
 module.exports = router

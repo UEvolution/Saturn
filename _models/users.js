@@ -8,7 +8,7 @@ let Users = sequelize.define('users', {
     autoIncrement: true,
     primaryKey: true
   },
-  niceName: {
+  nice_name: {
     type: Sequelize.STRING,
     allowNull: false,
     unique: true
@@ -17,34 +17,14 @@ let Users = sequelize.define('users', {
     type: Sequelize.STRING,
     allowNull: false,
     validate: {
-      minLen(val) {
-        if(!val) {
-          return new Error('密码不能为空!')
-        } else if (val.length < 6) {
-          return new Error('密码长度不能低于6位!')
-        } else if(val.length > 26) {
-          return new Error('密码长度不能大于26位!')
-        } else {
-          return val
-        }
-      }
+      len: [8, 64]
     }
   },
   pic: {
-    type: Sequelize.STRING,
-    validate: {
-      isUrl: {
-        msg: '请检查特色图片地址!'
-      }
-    }
+    type: Sequelize.STRING
   },
   avatar: {
-    type: Sequelize.STRING,
-    validate: {
-      isUrl: {
-        msg: '请检查头像地址!'
-      }
-    }
+    type: Sequelize.STRING
   },
   status: {
     type: Sequelize.INTEGER,
@@ -52,19 +32,17 @@ let Users = sequelize.define('users', {
   },
   email: {
     type: Sequelize.STRING,
-    unique: true,
     validate: {
       isEmail: true
     }
   },
   bio: {
-    type: Sequelize.TEXT,
-    defaultValue: '来啊！把我改了吧!'
+    type: Sequelize.TEXT
   },
   role: {
     type: Sequelize.INTEGER
   },
-  loginTimes: {
+  login_times: {
     type: Sequelize.INTEGER,
     defaultValue: 0
   }

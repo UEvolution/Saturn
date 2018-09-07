@@ -28,7 +28,7 @@ module.exports = {
   cryptoText: '',
   default: {
     user: {
-      nice_name: '',
+      niceName: '',
       password: '',
       role: 1,
       status: 21
